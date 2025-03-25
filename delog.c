@@ -3,10 +3,10 @@
 
 #include <delog.h>
 
-static int delog_str_length = VLOG_STR_LENGTH;
-static char delog_buf[VLOG_STR_LENGTH + 1] = {};
+volatile int delog_str_length = VLOG_STR_LENGTH;
+volatile char delog_buf[VLOG_STR_LENGTH + 1] = {};
 
-void dlog_sync() {}
+volatile void dlog_sync() {}
 
 void delog(enum delog_level level, const char *fmt, ...)
 {
@@ -14,7 +14,6 @@ void delog(enum delog_level level, const char *fmt, ...)
     va_start(args, fmt);
     delog_buf[VLOG_STR_LENGTH] = level;
     vsnprintf(delog_buf, VLOG_STR_LENGTH, fmt, args);
-    printf(delog_buf);
     va_end(args);
     dlog_sync();
 }

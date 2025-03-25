@@ -21,6 +21,6 @@ enum delog_level {
     DELOG_LEVEL_TRACE
 };
 
-void delog(enum delog_level level, const char *fmt, ...);
+volatile void delog(enum delog_level level, const char *fmt, ...);
 
 #endif
